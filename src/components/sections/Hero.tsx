@@ -63,7 +63,7 @@ export function Hero() {
 
               <div className="relative origin-left overflow-hidden sm:scale-150">
                 <div id="contact-btn" className="flex -translate-y-full">
-                  <Button label="Get in touch" url="https://wa.me/01036566152" />
+                  <Button label="Get in touch" url="https://wa.me/+201036566152" />
                 </div>
               </div>
             </div>

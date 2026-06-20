@@ -45,7 +45,7 @@ export function Contact() {
             className="heading-1 text-flax-smoke-200 max-w-[10ch] text-center leading-none"
           />
           <div className="mt-[5%] flex scale-150 items-center lg:scale-[1.5] xl:scale-[3] 2xl:scale-[3.5]">
-            <Button label="Get in touch" url="https://wa.me/01036566152" />
+            <Button label="Get in touch" url="https://wa.me/+201036566152" />
           </div>
         </div>
         <div className="absolute bottom-5 flex w-full items-center justify-center px-5 md:justify-between">
