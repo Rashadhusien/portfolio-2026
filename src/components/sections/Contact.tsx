@@ -69,7 +69,7 @@ export function Contact() {
           </div>
 
           <div className="heading-6 text-flax-smoke-500 w-fit">
-            <p className="w-full font-bold uppercase">For further inquiries</p>
+            <div className="w-full font-bold uppercase">For further inquiries</div>
             <Link
               className="text-flax-smoke-300 h-6 text-right font-medium tracking-wider lowercase"
               label="rashadelrifai@gmail.com"

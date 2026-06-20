@@ -114,7 +114,7 @@ export function Nav({ onScrollLock }: NavProps) {
 
           <div className="w-full">
             <div className="text-flax-smoke-50 mt-2 h-full font-normal">
-              <p className="text-left text-sm font-bold uppercase">Email address</p>
+              <div className="text-left text-sm font-bold uppercase">Email address</div>
               <Link
                 className="font-medium tracking-wider"
                 label="rashadelrifai@gmail.com"

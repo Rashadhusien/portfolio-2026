@@ -6,6 +6,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://hetari.github.io/portfolio/sitemap.xml',
+    sitemap: 'https://www.rashadhussein.com/sitemap.xml',
   };
 }

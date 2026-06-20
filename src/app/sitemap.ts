@@ -3,7 +3,7 @@ import type { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://hetari.github.io/portfolio/',
+      url: 'https://www.rashadhussein.com/',
       lastModified: new Date(),
       changeFrequency: 'hourly',
       priority: 1,

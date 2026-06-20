@@ -6,7 +6,7 @@ import './globals.css';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://hetari.github.io/portfolio'),
+  metadataBase: new URL('https://www.rashadhussein.com/'),
   title: 'Rashad Hussein - Full-Stack Developer',
   description:
     'Rashad Hussein - A freelance who is experienced in full-Stack Developer helping startups all around the world gain their unfair advantage',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: 'Rashad Hussein - Full-Stack Developer',
     description:
       'Rashad Hussein - A freelance who is experienced in full-Stack Developer helping startups all around the world gain their unfair advantage',
-    url: 'https://hetari.github.io/portfolio/',
+    url: 'https://www.rashadhussein.com/',
     siteName: 'Rashad Hussein — Freelance Web Developer',
     type: 'website',
     locale: 'en_US',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     images: ['/og-pic.webp'],
   },
   alternates: {
-    canonical: 'https://hetari.github.io/portfolio/',
+    canonical: 'https://www.rashadhussein.com/',
   },
 };
 

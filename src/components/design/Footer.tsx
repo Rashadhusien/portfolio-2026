@@ -12,7 +12,7 @@ const footerSections = [
   { title: 'Socials', links: socialLinks },
   { title: 'Resources', links: resourceLinks },
 ];
-
+  
 export function Footer() {
   const { lenis } = useLenis();
   const [myLocalTime, setMyLocalTime] = useState('');
@@ -50,13 +50,13 @@ export function Footer() {
             </p>
             <div className="mt-2 space-y-1">
               {section.links.map((link) => (
-                <p key={link.label} className="heading-6">
+                <div key={link.label} className="heading-6">
                   <Link
                     className="font-medium tracking-wider lowercase"
                     label={link.label}
                     url={link.url}
                   />
-                </p>
+                </div>
               ))}
             </div>
           </div>
