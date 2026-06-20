@@ -17,16 +17,21 @@ export function getCharClassName(isFancyFont: boolean): string {
   return classes;
 }
 
-export function getWordWrapperClassName(isNewLine: boolean): string {
-  let result = 'text-nowrap! overflow-clip ';
-  if (isNewLine) {
-    result += ' leading-base! block ';
-  } else {
-    result += ' inline-block ';
+export function getWordWrapperClassName(isNewLine: boolean , isSpace?:boolean): string {
+  let result = 'overflow-clip ';
+
+  if (isSpace) {
+    result += 'mr-[0.25em] '
   }
+
+  if (isNewLine) {
+    result += 'leading-base! block ';
+  } else {
+    result += 'inline-block ';
+  }
+
   return result;
 }
-
 const getAvailableForWorkDate = () => {
   const date = new Date();
 

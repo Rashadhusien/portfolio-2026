@@ -53,7 +53,7 @@ export function AboutMe() {
           id="little-bit-about-me"
           text="Programmer, Developer, Web-animator/"
           isFancyFont
-          isNewLine
+          // isNewLine
           className="heading-1-alt lg:heading-1 section-heading col-span-full leading-none font-extrabold uppercase md:col-span-8 md:col-start-6"
         />
       </div>

@@ -42,7 +42,7 @@ const socialLinks = [
   },
   {
     label: 'WhatsApp',
-    url: 'https://wa.me/01036566152',
+    url: 'https://wa.me/+201036566152',
   },
   {
     label: 'GitHub',

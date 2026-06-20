@@ -58,7 +58,8 @@ export function Hero() {
               <SplitText
                 id="whoAmI"
                 text="A freelance full-stack developer, cutting-edge technologies to deliver comprehensive solutions for your business."
-                className="who-am-i heading-5 w-full tracking-wide  max-w-[30ch] overflow-clip leading-snug! font-medium text-balance sm:max-w-[37ch] lg:text-start"
+                className="who-am-i heading-5 w-full tracking-wide  max-w-[30ch] overflow-clip leading-sung font-medium text-balance sm:max-w-[37ch] lg:text-start"
+                isSpace
               />
 
               <div className="relative origin-left overflow-hidden sm:scale-150">
@@ -75,12 +76,13 @@ export function Hero() {
               <div className="overlay bg-flax-smoke-50 absolute inset-0 z-2" />
               <Image
                 id="profile-img"
-                src="/images/profile.png"
+                src="/images/profile.webp"
                 alt="Rashad Hussein profile"
                 width={800}
                 height={1000}
                 className="size-full scale-90 rounded-lg object-cover object-top brightness-110 grayscale"
                 priority
+                fetchPriority='high'
               />
             </div>
 

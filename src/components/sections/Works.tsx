@@ -10,59 +10,87 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 
 const selectedWorksProps = [
   {
-    name: 'Madar',
+    name: 'Plumming Services',
     category: 'Frontend',
-    tags: ['Vue.js', 'Tailwind', 'Gsap'],
-    videoSrc: '/videos/work5.webm',
+    tags: ['wordpress'],
+    videoSrc: '/videos/work1.mp4',
     imageBg: '/images/5.webp',
-    url: 'https://madar.services/',
+    url: 'https://linkdesign.site/',
     year: '2025',
   },
   {
-    name: 'Iphone 15 Clone',
-    category: 'Frontend & Animation & 3D',
-    tags: ['Animation', '3D'],
-    videoSrc: '/videos/work2.webm',
+    name: 'Cody',
+    category: 'Full Stack & Animation & LMS',
+    tags: ['Next.js', 'Animation', 'SQL'],
+    videoSrc: '/videos/work2.mp4',
     imageBg: '/images/2.webp',
-    url: 'https://github.com/Hetari/iphone15-pro-clone',
+    url: 'https://cody-nine-iota.vercel.app/',
     year: '2024',
   },
   {
-    name: 'Axon',
-    category: 'Frontend & Documentation',
-    tags: ['Vue.js', 'Tailwind', 'AI'],
-    videoSrc: '/videos/work3.webm',
+    name: 'Storeit',
+    category: 'Full Stack & Documentation & Storage',
+    tags: ['Next.js', 'Tailwind', 'AI'],
+    videoSrc: '/videos/work3.mp4',
     imageBg: '/images/3.webp',
-    url: 'https://github.com/Hetari/axon',
+    url: 'https://storage-managment-indol.vercel.app/',
     year: '2024',
   },
-  {
-    name: 'Blogy',
-    category: 'Frontend & Backend',
-    tags: ['Vue.js', 'Laravel'],
-    videoSrc: '/videos/work4.webm',
-    imageBg: '/images/4.webp',
-    url: 'https://github.com/Hetari/blog',
-    year: '2023',
-  },
-  {
-    name: 'Pyutube',
-    category: 'CLI Tool & Cross Platform',
-    tags: ['Python', 'CLI', 'Youtube'],
-    videoSrc: '/videos/work1.webm',
-    imageBg: '/images/1.webp',
-    url: 'https://github.com/hetari/pyutube',
-    year: '2024',
-  },
+  // {
+  //   name: 'Blogy',
+  //   category: 'Frontend & Backend',
+  //   tags: ['Vue.js', 'Laravel'],
+  //   videoSrc: '/videos/work4.webm',
+  //   imageBg: '/images/4.webp',
+  //   url: 'https://github.com/Hetari/blog',
+  //   year: '2023',
+  // },
+  // {
+  //   name: 'Pyutube',
+  //   category: 'CLI Tool & Cross Platform',
+  //   tags: ['Python', 'CLI', 'Youtube'],
+  //   videoSrc: '/videos/work1.webm',
+  //   imageBg: '/images/1.webp',
+  //   url: 'https://github.com/hetari/pyutube',
+  //   year: '2024',
+  // },
 ];
 
 export function Works() {
   const [index, setIndex] = useState(0);
+  const indexRef = useRef(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const { width } = useWindowSize();
   const isSmallScreen = width < 768;
 
   const cursorTl = useRef<gsap.core.Timeline | null>(null);
+
+  useEffect(() => {
+    indexRef.current = index;
+  }, [index]);
+
+  const animateIndexChange = (newIndex: number, direction: 'up' | 'down') => {
+    if (newIndex === indexRef.current) return;
+
+    const exitY = direction === 'down' ? -100 : 100;
+    const enterY = direction === 'down' ? 100 : -100;
+
+    gsap.to('#index', {
+      yPercent: exitY,
+      duration: 0.3,
+      ease: 'power4.inOut',
+      onComplete: () => {
+        gsap.set('#index', {
+          yPercent: enterY,
+          onComplete: () => {
+            indexRef.current = newIndex;
+            setIndex(newIndex);
+            gsap.to('#index', { yPercent: 0, duration: 0.3, ease: 'power1.inOut' });
+          },
+        });
+      },
+    });
+  };
 
   useGSAP(() => {
     const cursor = document.getElementById('cursor');
@@ -96,40 +124,14 @@ export function Works() {
             end: 'bottom 25%',
             scrub: 0.01,
             onLeaveBack: () => {
-              const currentIndex = index;
-              if (currentIndex !== 0) {
-                gsap.to('#index', {
-                  yPercent: 100,
-                  duration: 0.3,
-                  ease: 'power4.inOut',
-                  onComplete: () => {
-                    gsap.set('#index', { yPercent: -100, onComplete: () => {
-                      setIndex(Math.max(i - 1, 0));
-                      gsap.to('#index', { yPercent: 0, duration: 0.3, ease: 'power1.inOut' });
-                    }});
-                  },
-                });
-              }
+              if (indexRef.current === 0) return;
+              animateIndexChange(Math.max(i - 1, 0), 'up');
             },
           },
           ease: 'power1.inOut',
           onComplete: () => {
-            if (index !== selectedWorksProps.length - 1) {
-              gsap.to('#index', {
-                yPercent: -100,
-                duration: 0.3,
-                ease: 'power4.inOut',
-                onComplete: () => {
-                  gsap.set('#index', {
-                    yPercent: 100,
-                    onComplete: () => {
-                      setIndex(Math.min(i + 1, selectedWorksProps.length - 1));
-                      gsap.to('#index', { yPercent: 0, duration: 0.3, ease: 'power1.inOut' });
-                    },
-                  });
-                },
-              });
-            }
+            if (indexRef.current === selectedWorksProps.length - 1) return;
+            animateIndexChange(Math.min(i + 1, selectedWorksProps.length - 1), 'down');
           },
         });
       });
