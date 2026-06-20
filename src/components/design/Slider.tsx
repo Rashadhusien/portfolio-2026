@@ -20,7 +20,7 @@ const people = [
     author: 'Ahmed Basuony',
     position: 'Full Stack Developer',
     tags: ['Web Development', 'Animation', 'UI/UX'],
-    profile: '/images/Ahmed.jfif',
+    profile: '/images/Ahmed.webp',
   },
   {
     quote:
@@ -28,7 +28,7 @@ const people = [
     author: 'Reda Salem',
     position: 'Full Stack Developer',
     tags: ['Web Development', 'SEO' , 'React'],
-    profile: '/images/reda.jfif',
+    profile: '/images/reda.webp',
   },
 ];
 
