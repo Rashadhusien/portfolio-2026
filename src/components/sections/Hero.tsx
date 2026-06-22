@@ -6,6 +6,7 @@ import { MyName, Star } from '@/components/design';
 import { Button } from '@/components/common/Button';
 import { SplitText } from '@/components/SplitText';
 import { getAvailableForWorkDate } from '@/lib/functions';
+import { socialLinks } from '@/lib/data';
 
 export function Hero() {
   const [availableDate, setAvailableDate] = useState('');
@@ -87,10 +88,22 @@ export function Hero() {
             </div>
 
             <div className="relative col-span-8 size-full overflow-clip text-end sm:col-span-4">
+              {/* <div className=" grid  grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-2 ">
+                {socialLinks.map((social) => (
+                  <Button
+                    key={social.label}
+                  
+                    className="hero-social-link border-flax-smoke-600 border opacity-0"
+                    label={social.label}
+                    url={social.url}
+                  />
+                ))}
+              </div> */}
               <div
                 id="available-for-work"
                 className="absolute right-0 bottom-0 flex translate-y-full flex-col items-end"
               >
+                
                 <p className="3xl:text-base block leading-snug font-medium -tracking-tight uppercase">
                   Available for freelance work
                 </p>

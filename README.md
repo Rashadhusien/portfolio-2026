@@ -1,8 +1,8 @@
-# Ebraheem Alhetari - Full-Stack Developer Portfolio
+# Rashad Hussein - Full-Stack Developer Portfolio
 
 ### Enjoying my project? Please show your appreciation by starring it on GitHub! ⭐
 
-Welcome to my portfolio! I'm **Ebraheem Alhetari**, a full-stack developer and freelancer with a passion for creating immersive web experiences. Specializing in **React**, **Next.js**, **GSAP** animations, and **Tailwind CSS**, I craft elegant, responsive, and fully animated websites.
+Welcome to my portfolio! I'm **Rashad Hussein**, a full-stack developer and freelancer with a passion for creating immersive web experiences. Specializing in **React**, **Next.js**, **GSAP** animations, and **Tailwind CSS**, I craft elegant, responsive, and fully animated websites.
 
 ## Attribution
 
@@ -10,8 +10,6 @@ This portfolio is a **Next.js port** of the original Vue 3 implementation by **E
 
 - **UI/UX design:** [Huy Nguyen](https://www.huyng.xyz)
 - **Original GSAP/Vue implementation:** [Ebraheem Alhetari](https://github.com/hetari/portfolio)
-
-The original Vue source is preserved in `./reference-vue` for comparison.
 
 ## 📜 Important Note
 
@@ -49,7 +47,7 @@ The entire portfolio is a dynamic and animated experience, designed to capture a
 
 ```bash
 # Clone the repository
-git clone https://github.com/hetari/portfolio
+git clone https://github.com/Rashadhusien/portfolio-2026
 
 # Navigate to the project directory
 cd portfolio

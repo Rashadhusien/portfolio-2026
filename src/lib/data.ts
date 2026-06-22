@@ -37,8 +37,12 @@ const navbarLinks = [
 
 const socialLinks = [
   {
-    label: 'X',
-    url: 'https://x.com/husein_ras77425',
+    label: 'Instagram',
+    url: 'https://www.instagram.com/rashadhussein.dev/',
+  },
+  {
+    label: 'TikTok',
+    url: 'https://www.tiktok.com/@rashadhussein.dev',
   },
   {
     label: 'WhatsApp',

@@ -359,6 +359,13 @@ const animateHeroNav = () => {
     scale: 0.9,
     translateZ: 0,
   });
+
+  gsap.to('.hero-social-link', {
+    opacity: 1,
+    delay: 0.4,
+    duration: 1.5,
+    ease: 'power4.inOut',
+  });
 };
 
 const animateAboutMeSectionLeave = (id: string) => {
