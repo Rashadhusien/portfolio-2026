@@ -10,9 +10,18 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 
 const selectedWorksProps = [
   {
+    name: 'Event Management System',
+    category: 'Frontend & Backend',
+    tags: ['Next.js', 'PostgreSQL', 'shadcn/ui', 'tedx'],
+    videoSrc: '/videos/work4.webm',
+    imageBg: '/images/4.webp',
+    url: 'https://www.tedxnewcairostemyouth.org/',
+    year: '2026',
+  },
+  {
     name: 'Plumming Services',
     category: 'Frontend',
-    tags: ['wordpress'],
+    tags: ['wordpress', 'woocommerce', 'elementor'],
     videoSrc: '/videos/work1.mp4',
     imageBg: '/images/5.webp',
     url: 'https://linkdesign.site/',
@@ -21,7 +30,7 @@ const selectedWorksProps = [
   {
     name: 'Cody',
     category: 'Full Stack & Animation & LMS',
-    tags: ['Next.js', 'Animation', 'SQL'],
+    tags: ['Next.js', 'Animation', 'SQL', 'shadcn/ui'],
     videoSrc: '/videos/work2.mp4',
     imageBg: '/images/2.webp',
     url: 'https://cody-nine-iota.vercel.app/',
@@ -36,15 +45,6 @@ const selectedWorksProps = [
     url: 'https://storage-managment-indol.vercel.app/',
     year: '2024',
   },
-  // {
-  //   name: 'Blogy',
-  //   category: 'Frontend & Backend',
-  //   tags: ['Vue.js', 'Laravel'],
-  //   videoSrc: '/videos/work4.webm',
-  //   imageBg: '/images/4.webp',
-  //   url: 'https://github.com/Hetari/blog',
-  //   year: '2023',
-  // },
   // {
   //   name: 'Pyutube',
   //   category: 'CLI Tool & Cross Platform',

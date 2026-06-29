@@ -22,7 +22,6 @@ export default function Home() {
         <AboutMe />
         <People />
         <Contact />
-
       </main>
       <Footer />
     </div>
