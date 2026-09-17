@@ -45,15 +45,15 @@ const selectedWorksProps = [
     url: 'https://storage-managment-indol.vercel.app/',
     year: '2024',
   },
-  // {
-  //   name: 'Pyutube',
-  //   category: 'CLI Tool & Cross Platform',
-  //   tags: ['Python', 'CLI', 'Youtube'],
-  //   videoSrc: '/videos/work1.webm',
-  //   imageBg: '/images/1.webp',
-  //   url: 'https://github.com/hetari/pyutube',
-  //   year: '2024',
-  // },
+  {
+    name: 'Full-Stack Content Platform',
+    category: 'Full Stack & Content Management',
+    tags: ['Next.js', 'PostgreSQL', 'shadcn/ui', 'gsap'],
+    videoSrc: '/videos/work5.mp4',
+    imageBg: '/images/5.webp',
+    url: 'https://portfolio-arwa.vercel.app/',
+    year: '2025',
+  },
 ];
 
 export function Works() {
