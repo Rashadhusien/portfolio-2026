@@ -1,0 +1,12 @@
+#!/bin/sh
+# Blocks pushes to main. dev -> main merges are done manually by the owner:
+#   ALLOW_MAIN_PUSH=1 git push origin main
+protected="refs/heads/main"
+while read -r local_ref local_sha remote_ref remote_sha; do
+  if [ "$remote_ref" = "$protected" ] && [ "$ALLOW_MAIN_PUSH" != "1" ]; then
+    echo "pre-push: pushing to 'main' is blocked. Push to a feature/fix/chore branch and open a PR into 'dev'." >&2
+    echo "pre-push: (owner override: ALLOW_MAIN_PUSH=1 git push origin main)" >&2
+    exit 1
+  fi
+done
+exit 0
