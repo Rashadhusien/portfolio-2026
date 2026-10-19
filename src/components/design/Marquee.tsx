@@ -22,7 +22,7 @@ const starSvg = (
 
 function MarqueeItem({ starClass }: { starClass: string }) {
   return (
-    <h4 className="sm:heading-1 flex w-full items-center text-3xl font-bold text-nowrap whitespace-nowrap max-sm:mx-6">
+    <h4 className="sm:heading-1 flex w-full items-center py-[0.06em] text-3xl leading-[1.15]! font-bold text-nowrap whitespace-nowrap max-sm:mx-6">
       Full Stack Developer
       <div className={starClass}>{starSvg}</div>
     </h4>
@@ -67,9 +67,10 @@ export function Marquee() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: '#marquee-section',
-        start: 'top center',
-        end: '110% center',
-        scrub: 0.1,
+        // Short range so each row rests fully visible instead of half-masked.
+        start: 'top 70%',
+        end: 'top 40%',
+        scrub: 0.4,
       },
     });
     tl.fromTo('#marquee-1', { yPercent: 0 }, { yPercent: -100 });
