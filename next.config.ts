@@ -3,7 +3,8 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   images: {
-    formats: ['image/webp'],
+    formats: ['image/avif', 'image/webp'],
+    qualities: [75, 90],
   },
   turbopack: {
     root: path.join(__dirname),
