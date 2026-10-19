@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from '@/components/SplitText';
 import { animateSplitText } from '@/lib/animations';
 import { useWindowSize } from '@/hooks/useWindowSize';
@@ -57,38 +58,21 @@ const selectedWorksProps = [
 ];
 
 export function Works() {
-  const [index, setIndex] = useState(0);
-  const indexRef = useRef(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const indexReelRef = useRef<HTMLSpanElement>(null);
   const { width } = useWindowSize();
   const isSmallScreen = width < 768;
 
   const cursorTl = useRef<gsap.core.Timeline | null>(null);
 
-  useEffect(() => {
-    indexRef.current = index;
-  }, [index]);
-
-  const animateIndexChange = (newIndex: number, direction: 'up' | 'down') => {
-    if (newIndex === indexRef.current) return;
-
-    const exitY = direction === 'down' ? -100 : 100;
-    const enterY = direction === 'down' ? 100 : -100;
-
-    gsap.to('#index', {
-      yPercent: exitY,
-      duration: 0.3,
-      ease: 'power4.inOut',
-      onComplete: () => {
-        gsap.set('#index', {
-          yPercent: enterY,
-          onComplete: () => {
-            indexRef.current = newIndex;
-            setIndex(newIndex);
-            gsap.to('#index', { yPercent: 0, duration: 0.3, ease: 'power1.inOut' });
-          },
-        });
-      },
+  // Slides the 01…0N reel to the project in view. overwrite keeps fast scrolling
+  // from stacking tweens (which used to leave the number pushed out of view).
+  const showIndex = (i: number) => {
+    gsap.to(indexReelRef.current, {
+      yPercent: (-100 * i) / selectedWorksProps.length,
+      duration: 0.5,
+      ease: 'power4.out',
+      overwrite: 'auto',
     });
   };
 
@@ -116,22 +100,13 @@ export function Works() {
     );
 
     if (!isSmallScreen) {
-      gsap.utils.toArray('.work-card').forEach((div, i) => {
-        gsap.timeline({ defaults: { duration: 0.7 } }).to(div as Element, {
-          scrollTrigger: {
-            trigger: div as Element,
-            start: 'top 25%',
-            end: 'bottom 25%',
-            scrub: 0.01,
-            onLeaveBack: () => {
-              if (indexRef.current === 0) return;
-              animateIndexChange(Math.max(i - 1, 0), 'up');
-            },
-          },
-          ease: 'power1.inOut',
-          onComplete: () => {
-            if (indexRef.current === selectedWorksProps.length - 1) return;
-            animateIndexChange(Math.min(i + 1, selectedWorksProps.length - 1), 'down');
+      gsap.utils.toArray<Element>('.work-card').forEach((card, i) => {
+        ScrollTrigger.create({
+          trigger: card,
+          start: 'top 50%',
+          end: 'bottom 50%',
+          onToggle: (self) => {
+            if (self.isActive) showIndex(i);
           },
         });
       });
@@ -191,9 +166,14 @@ export function Works() {
 
       <div className="sm:column-gap! relative mt-12 grid size-full grid-cols-12 lg:mt-[10%]">
         <div className="text-flax-smoke-100 sticky top-12 col-span-5 hidden h-fit w-full overflow-hidden text-[22vw] leading-[0.8] font-semibold md:flex">
-          <span className="font-title! relative -tracking-wider">0</span>
-          <span id="index" className="font-title! relative -tracking-wider will-change-transform">
-            {index + 1}.
+          <span className="relative block h-[0.8em] overflow-hidden">
+            <span ref={indexReelRef} className="flex flex-col will-change-transform">
+              {selectedWorksProps.map((work, i) => (
+                <span key={work.name} className="font-title! block h-[0.8em] -tracking-wider">
+                  {String(i + 1).padStart(2, '0')}.
+                </span>
+              ))}
+            </span>
           </span>
         </div>
         <aside
