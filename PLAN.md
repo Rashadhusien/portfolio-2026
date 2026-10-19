@@ -118,15 +118,51 @@ Testimonials → (Content) → Contact → Footer (reveal).
 
 ---
 
-## D) Content I need from you
+## D) Content (gathered 2026-10-19 from LinkedIn and the owner)
 
-1. Experience: dates, one-line description and 2–3 achievements per role, stack used.
-2. Stats: real numbers (projects, clients, years).
-3. Availability label for the config (for example `NOV '26`) and whether it should auto-hide when unavailable.
-4. Your real timezone/location for the footer and contact (currently Yemen/`Asia/Aden` from the original author),
-   your X profile URL, and your cal.com link.
-5. High-res screenshots or screen recordings (≥ 1440p) of each project, or permission for me to capture them from the live URLs.
-6. Channel URL(s) if you want the Content section.
+Source: owner's LinkedIn profile (read with permission). This feeds `src/data/experience.ts` and `src/data/stats.ts`
+in Phase 4. Nothing here is in code yet.
+
+**Headline:** Front-End Developer · Cairo, Egypt · top skills: Next.js, Front-End Development, Tailwind CSS,
+JavaScript, Git.
+
+### Experience (newest first)
+
+| # | Role | Company | Dates | Mode | Highlights |
+|---|---|---|---|---|---|
+| 01 | Frontend Developer (Internship) | 3D\|Diagnostix | Jul 2026 – Present | Remote | Front-end coding and web application development |
+| 02 | Information Technology Lead | TEDx New Cairo STEM Youth | Jan 2026 – Jul 2026 | Remote | Led the technical team and website work. Built the full-stack event platform (Next.js 15, React 19, TypeScript, PostgreSQL/Neon, Drizzle, Auth.js v5, Kashier payments, role-based access, admin dashboard, speaker/sponsor management, promo codes, Resend emails, Cloudinary). Honoured at the event. |
+| 03 | Frontend Developer (Internship) | Huma-volve | Nov 2025 – Jan 2026 | Remote | Agile cross-functional team; responsive React UI components; turned UI/UX designs into interfaces; followed the design system; code reviews and stand-ups |
+| (opt) | Space Environment & Space Weather Trainee | Egyptian Space Academy | Jan – Feb 2026 | On-site, Cairo | Applied Python and data analysis (GNSS/satellite impact) |
+| (opt) | AI Tools for Workplace Productivity | Ta'heal (with IOM / Ministry of Youth & Sports) | Sep 2025 | On-site, Cairo | Generative AI tools for automation and content |
+| (opt) | CIB Summer Internship 2026, Gen AI track | CIB | Summer 2026 | n/a | Mentioned in a LinkedIn post, not in the experience list |
+
+Notes:
+- The original brief listed **Ziken Labs**, but it is **not on LinkedIn**. Role, dates and highlights are still needed.
+- The brief called TEDx "volunteer developer", but LinkedIn says **IT Lead**. The timeline uses IT Lead.
+
+### Stats (proposed, owner to confirm)
+
+| Stat | Value | Basis |
+|---|---|---|
+| Projects shipped | **5+** | five featured projects in Works |
+| Years building | **2+** (since 2024) | earliest dated project (Cody/Storeit, 2024) |
+| Internships / roles | **3** | 3D Diagnostix, TEDx, Huma-volve |
+| Community | **1.2K** | LinkedIn followers (1,299) |
+| Clients | **TBD** | not stated anywhere: owner to provide, or drop this stat |
+
+### Settled
+- Availability label: `NOV '26` in `src/config/site.ts` (`fix/availability-config`).
+- Timezone/location: `Africa/Cairo`, Cairo, Egypt (`fix/personal-data`).
+- Project media: captured from the live sites with permission (`fix/project-media-quality`).
+
+### Still open
+1. Ziken Labs details (role, dates, 2–3 highlights).
+2. Client count, or confirm dropping it.
+3. X profile URL (`xProfileUrl` in `src/lib/data.ts`; the icon renders without a link until it is set).
+4. Your cal.com link, if you want booking.
+5. Channel URL(s) for the optional Content section.
+6. A cleaner Plumbing recording: `work1` has a "dideo.com" watermark baked in.
 
 ## E) Risks & guardrails
 

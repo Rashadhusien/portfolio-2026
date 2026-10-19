@@ -14,7 +14,7 @@ Legend: `[ ]` todo · `[x]` done · **AC** = acceptance criteria.
 - [x] **Pre-push guard blocking `main`** (branch: `chore/project-docs-and-plan`)
   - AC: `.githooks/pre-push` exits 1 for `refs/heads/main`, 0 otherwise; installed in `.git/hooks`;
     `git config core.hooksPath .githooks` documented; owner override `ALLOW_MAIN_PUSH=1`.
-- [ ] **CLAUDE.md, PLAN.md, TASKS.md** (written, awaiting approval) (branch: `chore/project-docs-and-plan`)
+- [x] **CLAUDE.md, PLAN.md, TASKS.md** (approved 2026-10-19) (branch: `chore/project-docs-and-plan`)
   - AC: files at repo root; PR into `dev` opened; owner approves the plan.
 - [ ] **Lint baseline** (branch: `chore/lint-baseline`)
   - AC: `npm run lint` → 0 errors (fix setState-in-effect in AppShell/LenisProvider/Hero, prefer-const) and unused
@@ -91,12 +91,12 @@ Legend: `[ ]` todo · `[x]` done · **AC** = acceptance criteria.
 
 ## Phase 4: New sections
 
-- [ ] **Experience stacking cards** (branch: `feature/experience-timeline`), *needs content*
+- [ ] **Experience stacking cards** (branch: `feature/experience-timeline`), *content in PLAN.md §D; Ziken Labs details missing*
   - AC: 3 roles from `data/experience.ts`; cards stack with scale/dim on desktop; nav link added; mobile readable.
 - [ ] **Tech stack** (branch: `feature/tech-stack`)
   - AC: dual-direction marquee of local SVG logos sharing the velocity engine; (optional sphere) desktop only, drag
     to rotate, < 2 ms/frame scripting.
-- [ ] **Stats count-up** (branch: `feature/stats-countup`), *needs numbers*
+- [ ] **Stats count-up** (branch: `feature/stats-countup`), *proposed numbers in PLAN.md §D; client count TBD*
   - AC: numbers count once on enter with `tabular-nums` (no width jump); final values present in SSR HTML for SEO.
 - [ ] **Process pinned** (branch: `feature/process-pinned`)
   - AC: 4 steps advance with scroll inside a pin with a progress line; unpinned vertical list on mobile/reduced motion;
