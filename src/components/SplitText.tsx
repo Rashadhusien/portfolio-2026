@@ -21,7 +21,7 @@ export function SplitText({
   isSpace = false,
   id,
 }: SplitTextProps) {
-  const words = splitTextIntoChars(text, isFancyFont, isNewLine);
+  const words = splitTextIntoChars(text);
   const charClass = getCharClassName(isFancyFont);
   const wordClass = getWordWrapperClassName(isNewLine , isSpace);
 
