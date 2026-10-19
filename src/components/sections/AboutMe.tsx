@@ -3,11 +3,44 @@
 import Image from 'next/image';
 import { useGSAP } from '@gsap/react';
 import { SplitText } from '@/components/SplitText';
+import { xProfileUrl } from '@/lib/data';
 import {
   animateAboutMeSectionLeave,
   animateSplitText,
   xToZero,
 } from '@/lib/animations';
+
+function XLogoLink() {
+  const icon = (
+    <svg
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      className="inline-block size-[0.9em] -translate-y-[0.05em] fill-current align-middle"
+    >
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  );
+
+  if (!xProfileUrl) {
+    return (
+      <span role="img" aria-label="X">
+        {icon}
+      </span>
+    );
+  }
+
+  return (
+    <a
+      href={xProfileUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="X (Twitter) profile"
+      className="hover:text-flax-smoke-50 transition-colors duration-300"
+    >
+      {icon}
+    </a>
+  );
+}
 
 export function AboutMe() {
   useGSAP(() => {
@@ -84,7 +117,7 @@ export function AboutMe() {
               project leaves users with a feel-good sensation through meticulous
               attention to detail and user-centric design principles. <br /><br />
               When I&apos;m not immersed in web development and design, you can find me
-              sharing insights about my freelance journey on <i>&Xopf;</i>,
+              sharing insights about my freelance journey on <XLogoLink />,
               loudly, playing music (Funk), or just relaxing.
             </p>
           </div>
