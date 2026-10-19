@@ -7,6 +7,7 @@ import { Link } from '@/components/common/Link';
 import { SplitText } from '@/components/SplitText';
 import { animateSplitText } from '@/lib/animations';
 import earthLottie from '@/data/earth.json';
+import { siteConfig } from '@/config/site';
 
 const Lottie = dynamic(() => import('lottie-react'), { ssr: false });
 
@@ -45,7 +46,7 @@ export function Contact() {
             className="heading-1 text-flax-smoke-200 max-w-[10ch] text-center leading-none"
           />
           <div className="mt-[5%] flex scale-150 items-center lg:scale-[1.5] xl:scale-[3] 2xl:scale-[3.5]">
-            <Button label="Get in touch" url="https://wa.me/+201036566152" />
+            <Button label="Get in touch" url={siteConfig.contact.whatsappUrl} />
           </div>
         </div>
         <div className="absolute bottom-5 flex w-full items-center justify-center px-5 md:justify-between">
@@ -63,7 +64,7 @@ export function Contact() {
                 Working Globally
               </p>
               <p className="flex size-full items-center justify-start pr-2 pl-1">
-                Available Sep &apos;24
+                Available {siteConfig.availability.label}
               </p>
             </div>
           </div>
@@ -72,9 +73,9 @@ export function Contact() {
             <div className="w-full font-bold uppercase">For further inquiries</div>
             <Link
               className="text-flax-smoke-300 h-6 text-right font-medium tracking-wider lowercase"
-              label="rashadelrifai@gmail.com"
+              label={siteConfig.contact.email}
               icon
-              url="mailto:rashadelrifai@gmail.com"
+              url={`mailto:${siteConfig.contact.email}`}
             />
           </div>
         </div>

@@ -4,11 +4,9 @@ import Image from 'next/image';
 import { MyName, Star } from '@/components/design';
 import { Button } from '@/components/common/Button';
 import { SplitText } from '@/components/SplitText';
-import { getAvailableForWorkDate } from '@/lib/functions';
+import { siteConfig } from '@/config/site';
 
 export function Hero() {
-  const availableDate = getAvailableForWorkDate();
-
   return (
     <section className="padding-x! mb-[-100svh] py-0 ">
       <div
@@ -59,7 +57,7 @@ export function Hero() {
 
               <div className="relative origin-left overflow-hidden sm:scale-150">
                 <div id="contact-btn" className="flex -translate-y-full">
-                  <Button label="Get in touch" url="https://wa.me/+201036566152" />
+                  <Button label="Get in touch" url={siteConfig.contact.whatsappUrl} />
                 </div>
               </div>
             </div>
@@ -102,7 +100,7 @@ export function Hero() {
                   Available for freelance work
                 </p>
                 <h3 className="3xl:heading-1 heading-1-alt font-fancy! block leading-none font-bold -tracking-tight">
-                  {availableDate}
+                  {siteConfig.availability.label}
                 </h3>
               </div>
             </div>

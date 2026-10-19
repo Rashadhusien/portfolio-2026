@@ -1,3 +1,5 @@
+import { siteConfig } from '@/config/site';
+
 // Nav type
 export type navLinkType = {
   label: string;
@@ -46,7 +48,7 @@ const socialLinks = [
   },
   {
     label: 'WhatsApp',
-    url: 'https://wa.me/+201036566152',
+    url: siteConfig.contact.whatsappUrl,
   },
   {
     label: 'GitHub',
