@@ -1,15 +1,9 @@
-import gsap from 'gsap';
-import MotionPathHelper from 'gsap/MotionPathPlugin';
-import ScrollTrigger from 'gsap/ScrollTrigger';
-import { getLenis } from '@/lib/lenis-store';
-
-gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(MotionPathHelper);
+import { gsap } from '@/lib/gsap';
+import { setScrollLocked } from '@/lib/lenis-store';
 
 const displayNone = (id: string) => {
   gsap.set(id, { display: 'none' });
-  const lenis = getLenis();
-  if (lenis) lenis.start();
+  setScrollLocked(false);
 };
 const samsungErrorModal = (show: boolean = false) => {
   if (show) {
@@ -241,7 +235,8 @@ const animateLoadingPath = (
       setTimeout(() => {
         animateHeroNav();
         samsungErrorModal(isSamsung);
-        document.body.classList.remove('stop-scrolling');
+        // Samsung Internet stays locked until its notice is dismissed (displayNone).
+        setScrollLocked(isSamsung);
         window.scrollTo(0, 0);
       }, 120);
     },

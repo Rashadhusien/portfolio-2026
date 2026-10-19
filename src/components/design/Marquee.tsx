@@ -1,10 +1,6 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollToPlugin, ScrollTrigger } from 'gsap/all';
-
-gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
+import { gsap, useGSAP } from '@/lib/gsap';
 
 const starSvg = (
   <svg

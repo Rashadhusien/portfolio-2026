@@ -65,7 +65,10 @@ export default function RootLayout({
         <meta name="color-scheme" content="light" />
         <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </head>
-      <body>
+      <body className="stop-scrolling">
+        <noscript>
+          <style>{'body.stop-scrolling{max-height:none!important;overflow:visible!important}'}</style>
+        </noscript>
         <LenisProvider>
           <AppShell>{children}</AppShell>
         </LenisProvider>

@@ -14,7 +14,6 @@ import {
 } from '@/lib/animations';
 import { navbarLinks, navLinks, socialLinks } from '@/lib/data';
 import { gotoSection } from '@/lib/functions';
-import { useLenis } from '@/components/providers/LenisProvider';
 
 type NavProps = {
   onScrollLock?: (isLocked: boolean) => void;
@@ -22,7 +21,6 @@ type NavProps = {
 
 export function Nav({ onScrollLock }: NavProps) {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
-  const { lenis } = useLenis();
   const navRef = useRef<HTMLDivElement>(null);
 
   const toggleBtnClickAnimation = () => {
@@ -30,14 +28,13 @@ export function Nav({ onScrollLock }: NavProps) {
     document.getElementById('magneto')?.classList.toggle('active');
   };
 
-  const isFirstRender = useRef(true);
+  const wasNavbarOpen = useRef(isNavbarOpen);
 
   useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      onScrollLock?.(isNavbarOpen);
-      return;
-    }
+    // React only to real open/close changes (not mount, nor StrictMode's re-run):
+    // the preloader owns the initial scroll lock.
+    if (wasNavbarOpen.current === isNavbarOpen) return;
+    wasNavbarOpen.current = isNavbarOpen;
     onScrollLock?.(isNavbarOpen);
     const x = navRef.current;
     if (!x) return;
@@ -56,12 +53,7 @@ export function Nav({ onScrollLock }: NavProps) {
   });
 
   const handleGotoSection = (url: string) => {
-    if (lenis) {
-      lenis.start();
-      lenis.scrollTo(url, { duration: 3 });
-    } else {
-      gotoSection(url);
-    }
+    gotoSection(url);
     toggleBtnClickAnimation();
   };
 

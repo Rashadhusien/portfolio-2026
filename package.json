@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
-    "gsap": "^3.12.7",
+    "gsap": "^3.15.0",
     "lenis": "^1.2.3",
     "lottie-react": "^2.4.1",
     "moment-timezone": "^0.5.47",

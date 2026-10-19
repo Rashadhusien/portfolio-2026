@@ -5,8 +5,8 @@ import moment from 'moment-timezone';
 import { MagneticEffect } from '@/components/MagneticEffect';
 import { Link } from '@/components/common/Link';
 import { navbarLinks, resourceLinks, socialLinks } from '@/lib/data';
-import { useLenis } from '@/components/providers/LenisProvider';
 import { siteConfig } from '@/config/site';
+import { scrollToTarget } from '@/lib/lenis-store';
 
 const footerSections = [
   { title: 'Menu', links: navbarLinks },
@@ -15,7 +15,6 @@ const footerSections = [
 ];
   
 export function Footer() {
-  const { lenis } = useLenis();
   const [myLocalTime, setMyLocalTime] = useState('');
   const [userLocalTime, setUserLocalTime] = useState('');
 
@@ -33,9 +32,7 @@ export function Footer() {
   }, []);
 
   const scrollToTop = () => {
-    if (lenis) {
-      lenis.scrollTo('#app', { duration: 2 });
-    }
+    scrollToTarget('#app', 2);
   };
 
   return (

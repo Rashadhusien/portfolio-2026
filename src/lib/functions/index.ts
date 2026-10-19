@@ -1,4 +1,4 @@
-import { getLenis } from '@/lib/lenis-store';
+import { scrollToTarget } from '@/lib/lenis-store';
 
 export function splitTextIntoChars(text: string): string[][] {
   return text.split(' ').map((word) => word.split(''));
@@ -25,14 +25,7 @@ export function getWordWrapperClassName(isNewLine: boolean): string {
   return result;
 }
 const gotoSection = (url: string) => {
-  const lenis = getLenis();
-  if (!lenis) return;
-  lenis.start();
-  if (url === '#testimonials-section') {
-    lenis.scrollTo('#slider', { duration: 3 });
-    return;
-  }
-  lenis.scrollTo(url, { duration: 3 });
+  scrollToTarget(url === '#testimonials-section' ? '#slider' : url);
 };
 
 export { gotoSection };

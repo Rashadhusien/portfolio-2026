@@ -2,6 +2,7 @@
 
 import { useEffect, useSyncExternalStore, type ReactNode } from 'react';
 import Lenis from 'lenis';
+import { gsap, prefersReducedMotion, ScrollTrigger } from '@/lib/gsap';
 import {
   clearLenis,
   getLenis,
@@ -16,26 +17,19 @@ export function useLenis() {
 
 export function LenisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
-    const instance = new Lenis({
-      duration: 0.8,
-    });
+    // Reduced motion: keep native scrolling; ScrollTrigger works with it as-is.
+    if (prefersReducedMotion()) return;
+
+    const instance = new Lenis({ duration: 0.8, autoRaf: false });
+    // One clock for smooth scroll and ScrollTrigger, so pinned/scrubbed effects don't jitter.
+    instance.on('scroll', ScrollTrigger.update);
+    const tick = (time: number) => instance.raf(time * 1000);
+    gsap.ticker.add(tick);
+    gsap.ticker.lagSmoothing(0);
     setLenis(instance);
 
-    let rafId: number;
-    const raf = (time: number) => {
-      instance.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
-
-    document.body.classList.add('stop-scrolling');
-
-    const startTimeout = setTimeout(() => {
-      rafId = requestAnimationFrame(raf);
-    }, 2000);
-
     return () => {
-      clearTimeout(startTimeout);
-      cancelAnimationFrame(rafId);
+      gsap.ticker.remove(tick);
       instance.destroy();
       clearLenis();
     };

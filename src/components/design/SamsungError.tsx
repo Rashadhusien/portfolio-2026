@@ -1,16 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
 import { displayNone } from '@/lib/animations';
-import { useLenis } from '@/components/providers/LenisProvider';
 
 export function SamsungError() {
-  const { lenis } = useLenis();
-
-  useEffect(() => {
-    if (lenis) lenis.stop();
-  }, [lenis]);
-
   const handleClick = () => {
     displayNone('#samsung-error-modal');
   };

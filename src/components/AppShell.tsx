@@ -1,21 +1,16 @@
 'use client';
 
 import { useEffect, useRef, useSyncExternalStore } from 'react';
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
 import { Cursor } from '@/components/design/Cursor';
 import { LoadingScreen } from '@/components/design/LoadingScreen';
 import { SamsungError } from '@/components/design/SamsungError';
 import { Nav } from '@/components/common/Nav';
-import { useLenis } from '@/components/providers/LenisProvider';
+import { setScrollLocked } from '@/lib/lenis-store';
 import { useWindowSize } from '@/hooks/useWindowSize';
-
-gsap.registerPlugin(useGSAP);
 
 const subscribeNoop = () => () => {};
 
 export function AppShell({ children }: { children: React.ReactNode }) {
-  const { lenis } = useLenis();
   const { width, height } = useWindowSize();
   const noiseRef = useRef<SVGRectElement>(null);
   const isSamsungBrowser = useSyncExternalStore(
@@ -32,9 +27,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [width, height]);
 
   const handleScrollLock = (isLocked: boolean) => {
-    if (!lenis) return;
-    if (isLocked) lenis.stop();
-    else lenis.start();
+    setScrollLocked(isLocked);
   };
 
   return (
