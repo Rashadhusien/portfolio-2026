@@ -4,6 +4,11 @@ export const siteConfig = {
     // Shown in the hero ("Available for freelance work") and the contact section.
     label: "NOV '26",
   },
+  location: {
+    city: 'Cairo, Egypt',
+    // IANA zone for the footer clock.
+    timezone: 'Africa/Cairo',
+  },
   contact: {
     whatsappUrl: 'https://wa.me/+201036566152',
     email: 'rashadelrifai@gmail.com',

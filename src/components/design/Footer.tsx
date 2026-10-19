@@ -6,6 +6,7 @@ import { MagneticEffect } from '@/components/MagneticEffect';
 import { Link } from '@/components/common/Link';
 import { navbarLinks, resourceLinks, socialLinks } from '@/lib/data';
 import { useLenis } from '@/components/providers/LenisProvider';
+import { siteConfig } from '@/config/site';
 
 const footerSections = [
   { title: 'Menu', links: navbarLinks },
@@ -22,7 +23,7 @@ export function Footer() {
     const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     const updateTimes = () => {
-      setMyLocalTime(moment.tz('Asia/Aden').format('h:mm:ss a'));
+      setMyLocalTime(moment.tz(siteConfig.location.timezone).format('h:mm:ss a'));
       setUserLocalTime(moment.tz(userTimeZone).format('h:mm:ss a'));
     };
 
