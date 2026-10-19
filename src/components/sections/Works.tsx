@@ -19,7 +19,7 @@ const selectedWorksProps = [
     year: '2026',
   },
   {
-    name: 'Plumming Services',
+    name: 'Plumbing Services',
     category: 'Frontend',
     tags: ['wordpress', 'woocommerce', 'elementor'],
     videoSrc: '/videos/work1.mp4',
