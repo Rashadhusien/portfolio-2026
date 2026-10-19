@@ -154,147 +154,37 @@ const animateNavbarLeave = (
   resetOpacity(contactSelector);
 };
 
-const animateLoadingPath = (
-  path: SVGPathElement,
-  targetPath: string,
-  isSamsung: boolean,
-) => {
-  const tl = gsap.timeline({});
-  tl.to('#loading-screen', {
-    delay: 3,
-    bottom: '100%',
-    duration: 1,
-    ease: 'power2.inOut',
-    onStart: () => {
-      setTimeout(() => {
-        animateHeroNav();
-        samsungErrorModal(isSamsung);
-        // Samsung Internet stays locked until its notice is dismissed (displayNone).
-        setScrollLocked(isSamsung);
-        window.scrollTo(0, 0);
-      }, 120);
-    },
-  });
+/**
+ * Hero entrance, played as the preloader curtain lifts: header slides in, the name
+ * rises letter by letter, then portrait, subtitle and CTA. `instant` (reduced motion)
+ * jumps to the end state and skips the scroll-linked hero fade.
+ */
+const animateHeroIntro = (instant = false) => {
+  // Near-zero rather than 0: zero-duration tweens of the CSS variable below don't apply.
+  const d = instant ? 0.001 : 1;
+  const tl = gsap.timeline({ defaults: { ease: 'expo', duration: 1.4 * d } });
 
-  tl.to(
-    path,
-    {
-      duration: 1,
-      attr: { d: targetPath },
-      ease: 'power2.inOut',
-      onComplete: () => {
-        gsap.set('#loading-screen', { display: 'none' });
-      },
-    },
-    '<20%',
-  );
-};
+  // Name letters are hidden by Tailwind's `translate-y-full` (CSS `translate`). GSAP's
+  // SVG transform handling mis-reads that, so tween Tailwind's variable directly.
+  tl.to('header', { y: 0 }, 0)
+    .to('#svg-my-en-name g path', { '--tw-translate-y': '0%', stagger: 0.07 * d, duration: 1.3 * d }, 0.1 * d)
+    .to('#star', { x: 1 }, 0.35 * d)
+    .to('.overlay', { yPercent: 100, onComplete: () => gsap.set('.overlay', { display: 'none' }) }, 0.3 * d)
+    .to('#profile-img', { scale: 1 }, 0.4 * d)
+    .to(['#down-arrow', '#contact-btn', '#available-for-work'], { x: 0, y: 0, stagger: 0.08 * d }, 0.5 * d);
 
-const animateLoadingTextContainer = () => {
-  gsap.fromTo(
-    '#text',
-    1,
-    {
-      yoyo: true,
-      opacity: 0,
-    },
-    {
-      opacity: 1,
-      ease: 'circ.inOut',
-    },
-  );
-};
+  animateSplitText('#whoAmI .letters', '#whoAmI .letters', 1.5 * d, 0.005 * d, 0.5 * d);
 
-const animateLoadingText = (id: string) => {
-  gsap.to(id, {
-    y: 0,
-    duration: 1,
-    ease: 'power2.inOut',
-    delay: 0.5,
-    stagger: 0.1,
-    onComplete: () => {
-      gsap.to(id, {
-        delay: 1.2,
-        opacity: 0,
-        duration: 1,
-        ease: 'power2.inOut',
-        onComplete: () => {
-          gsap.set(id, {
-            y: '100%',
-            opacity: 100,
-          });
-        },
-      });
-    },
-  });
-};
+  if (!instant) {
+    gsap.to('#hero', {
+      scrollTrigger: { trigger: '#hero', start: 'top top', scrub: 1 },
+      opacity: 0.5,
+      scale: 0.9,
+      translateZ: 0,
+    });
+  }
 
-const animateHeroNav = () => {
-  gsap.to('header', {
-    y: 0,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
-
-  gsap.to('#svg-my-en-name g path', {
-    y: 0,
-    delay: 0.2,
-    duration: 1.5,
-    ease: 'power4.inOut',
-    stagger: 0.01,
-  });
-
-  gsap.to('#star', {
-    x: 1,
-    delay: 0.2,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
-
-  gsap.to('.overlay', {
-    y: '100%',
-    delay: 0.2,
-    duration: 1.5,
-    ease: 'power4.inOut',
-    onComplete: () => {
-      gsap.set('.overlay', { display: 'none' });
-    },
-  });
-
-  gsap.to('#profile-img', {
-    scale: 1,
-    delay: 0.4,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
-
-  gsap.to(['#down-arrow', '#contact-btn', '#available-for-work'], {
-    x: 0,
-    y: 0,
-    delay: 0.4,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
-
-  animateSplitText('#whoAmI .letters', '#whoAmI .letters', 1.5, 0.005, 0.4);
-
-  gsap.to('#hero', {
-    scrollTrigger: {
-      trigger: '#hero',
-      start: 'top top',
-      scrub: 1,
-    },
-    opacity: 0.5,
-    scale: 0.9,
-    translateZ: 0,
-  });
-
-  gsap.to('.hero-social-link', {
-    opacity: 1,
-    delay: 0.4,
-    duration: 1.5,
-    ease: 'power4.inOut',
-  });
+  return tl;
 };
 
 const animateAboutMeSectionLeave = (id: string) => {
@@ -316,10 +206,8 @@ export {
   navbarScale,
   animateNavbarEnter,
   animateNavbarLeave,
-  animateLoadingPath,
-  animateLoadingText,
-  animateLoadingTextContainer,
-  animateHeroNav,
+  animateHeroIntro,
+  samsungErrorModal,
   animateSplitText,
   animateAboutMeSectionLeave,
 };
