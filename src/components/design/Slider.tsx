@@ -1,11 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import Image from 'next/image';
 import { Button } from '@/components/common/Button';
-import { SplitText } from '@/components/SplitText';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import {
   getCharClassName,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useSyncExternalStore } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Cursor } from '@/components/design/Cursor';
@@ -12,15 +12,17 @@ import { useWindowSize } from '@/hooks/useWindowSize';
 
 gsap.registerPlugin(useGSAP);
 
+const subscribeNoop = () => () => {};
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { lenis } = useLenis();
   const { width, height } = useWindowSize();
   const noiseRef = useRef<SVGRectElement>(null);
-  const [isSamsungBrowser, setIsSamsungBrowser] = useState(false);
-
-  useEffect(() => {
-    setIsSamsungBrowser(/samsung/i.test(navigator.userAgent));
-  }, []);
+  const isSamsungBrowser = useSyncExternalStore(
+    subscribeNoop,
+    () => /samsung/i.test(navigator.userAgent),
+    () => false,
+  );
 
   useEffect(() => {
     if (noiseRef.current && width && height) {

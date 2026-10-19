@@ -1,19 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { MyName, Star } from '@/components/design';
 import { Button } from '@/components/common/Button';
 import { SplitText } from '@/components/SplitText';
 import { getAvailableForWorkDate } from '@/lib/functions';
-import { socialLinks } from '@/lib/data';
 
 export function Hero() {
-  const [availableDate, setAvailableDate] = useState('');
-
-  useEffect(() => {
-    setAvailableDate(getAvailableForWorkDate());
-  }, []);
+  const availableDate = getAvailableForWorkDate();
 
   return (
     <section className="padding-x! mb-[-100svh] py-0 ">

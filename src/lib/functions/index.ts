@@ -1,10 +1,6 @@
 import { getLenis } from '@/lib/lenis-store';
 
-export function splitTextIntoChars(
-  text: string,
-  isFancyFont = false,
-  isNewLine = false,
-): string[][] {
+export function splitTextIntoChars(text: string): string[][] {
   return text.split(' ').map((word) => word.split(''));
 }
 
@@ -50,7 +46,7 @@ const getAvailableForWorkDate = () => {
     'NOV',
     'DEC',
   ];
-  let index = date.getMonth();
+  const index = date.getMonth();
 
   const month = monthNames[index];
 

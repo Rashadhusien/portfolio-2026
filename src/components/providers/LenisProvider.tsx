@@ -1,33 +1,24 @@
 'use client';
 
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
+import { useEffect, useSyncExternalStore, type ReactNode } from 'react';
 import Lenis from 'lenis';
-import { clearLenis, setLenis } from '@/lib/lenis-store';
-
-type LenisContextValue = {
-  lenis: Lenis | null;
-};
-
-const LenisContext = createContext<LenisContextValue>({ lenis: null });
+import {
+  clearLenis,
+  getLenis,
+  setLenis,
+  subscribeLenis,
+} from '@/lib/lenis-store';
 
 export function useLenis() {
-  return useContext(LenisContext);
+  const lenis = useSyncExternalStore(subscribeLenis, getLenis, () => null);
+  return { lenis };
 }
 
 export function LenisProvider({ children }: { children: ReactNode }) {
-  const [lenis, setLenisState] = useState<Lenis | null>(null);
-
   useEffect(() => {
     const instance = new Lenis({
       duration: 0.8,
     });
-    setLenisState(instance);
     setLenis(instance);
 
     let rafId: number;
@@ -47,13 +38,8 @@ export function LenisProvider({ children }: { children: ReactNode }) {
       cancelAnimationFrame(rafId);
       instance.destroy();
       clearLenis();
-      setLenisState(null);
     };
   }, []);
 
-  return (
-    <LenisContext.Provider value={{ lenis }}>
-      {children}
-    </LenisContext.Provider>
-  );
+  return <>{children}</>;
 }
