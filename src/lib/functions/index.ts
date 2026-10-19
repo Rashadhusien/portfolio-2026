@@ -24,31 +24,6 @@ export function getWordWrapperClassName(isNewLine: boolean): string {
 
   return result;
 }
-const getAvailableForWorkDate = () => {
-  const date = new Date();
-
-  const year = date.getFullYear().toString().slice(-2);
-  const monthNames = [
-    'JAN',
-    'FEB',
-    'MAR',
-    'APR',
-    'MAY',
-    'JUN',
-    'JUL',
-    'AUG',
-    'SEP',
-    'OCT',
-    'NOV',
-    'DEC',
-  ];
-  const index = date.getMonth();
-
-  const month = monthNames[index];
-
-  return `${month} '${year}`;
-};
-
 const gotoSection = (url: string) => {
   const lenis = getLenis();
   if (!lenis) return;
@@ -60,4 +35,4 @@ const gotoSection = (url: string) => {
   lenis.scrollTo(url, { duration: 3 });
 };
 
-export { getAvailableForWorkDate, gotoSection };
+export { gotoSection };
