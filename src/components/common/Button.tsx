@@ -22,7 +22,7 @@ export function Button({ label, url, onClick, className }: ButtonProps) {
   };
 
   const sharedClass =
-    'leading-base group pointer-events-auto relative h-full max-w-full transform-none overflow-clip rounded-full bg-flax-smoke-950 px-5 py-2 text-[1rem] font-semibold uppercase tracking-normal text-flax-smoke-100 sm:text-sm ease-expo';
+    'leading-base group pointer-events-auto relative block h-full max-w-full transform-none overflow-clip rounded-full bg-flax-smoke-950 px-5 py-2 text-[1rem] font-semibold uppercase tracking-normal text-flax-smoke-100 sm:text-sm ease-expo';
 
   if (url && !url.startsWith('#')) {
     return (
