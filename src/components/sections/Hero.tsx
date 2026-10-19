@@ -46,15 +46,10 @@ export function Hero() {
                 </svg>
               </div>
 
-              <p className="sr-only ">
-                A freelance full-stack developer, cutting-edge technologies to
-                deliver comprehensive solutions for your business.
-              </p>
               <SplitText
                 id="whoAmI"
                 text="A freelance full-stack developer, cutting-edge technologies to deliver comprehensive solutions for your business."
                 className="who-am-i heading-5 w-full tracking-wide  max-w-[30ch] overflow-clip leading-sung font-medium text-balance sm:max-w-[37ch] lg:text-start"
-                isSpace
               />
 
               <div className="relative origin-left overflow-hidden sm:scale-150">
