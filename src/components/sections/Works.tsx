@@ -14,8 +14,9 @@ const selectedWorksProps = [
     name: 'Event Management System',
     category: 'Frontend & Backend',
     tags: ['Next.js', 'PostgreSQL', 'shadcn/ui', 'tedx'],
-    videoSrc: '/videos/work4.webm',
-    imageBg: '/images/4.webp',
+    mockup: '/images/work/event-management-system.webp',
+    poster: '/images/work/event-management-system-screen.webp',
+    videos: ['/videos/work4.webm', '/videos/work4.mp4'],
     url: 'https://www.tedxnewcairostemyouth.org/',
     year: '2026',
   },
@@ -23,8 +24,9 @@ const selectedWorksProps = [
     name: 'Plumbing Services',
     category: 'Frontend',
     tags: ['wordpress', 'woocommerce', 'elementor'],
-    videoSrc: '/videos/work1.mp4',
-    imageBg: '/images/5.webp',
+    mockup: '/images/work/plumbing-services.webp',
+    poster: '/images/work/plumbing-services-screen.webp',
+    videos: ['/videos/work1.webm', '/videos/work1.mp4'],
     url: 'https://linkdesign.site/',
     year: '2025',
   },
@@ -32,8 +34,9 @@ const selectedWorksProps = [
     name: 'Cody',
     category: 'Full Stack & Animation & LMS',
     tags: ['Next.js', 'Animation', 'SQL', 'shadcn/ui'],
-    videoSrc: '/videos/work2.mp4',
-    imageBg: '/images/2.webp',
+    mockup: '/images/work/cody.webp',
+    poster: '/images/work/cody-screen.webp',
+    videos: ['/videos/work2.webm', '/videos/work2.mp4'],
     url: 'https://cody-nine-iota.vercel.app/',
     year: '2024',
   },
@@ -41,8 +44,9 @@ const selectedWorksProps = [
     name: 'Storeit',
     category: 'Full Stack & Documentation & Storage',
     tags: ['Next.js', 'Tailwind', 'AI'],
-    videoSrc: '/videos/work3.mp4',
-    imageBg: '/images/3.webp',
+    mockup: '/images/work/storeit.webp',
+    poster: '/images/work/storeit-screen.webp',
+    videos: ['/videos/work3.webm', '/videos/work3.mp4'],
     url: 'https://storage-managment-indol.vercel.app/',
     year: '2024',
   },
@@ -50,8 +54,9 @@ const selectedWorksProps = [
     name: 'Full-Stack Content Platform',
     category: 'Full Stack & Content Management',
     tags: ['Next.js', 'PostgreSQL', 'shadcn/ui', 'gsap'],
-    videoSrc: '/videos/work5.mp4',
-    imageBg: '/images/5.webp',
+    mockup: '/images/work/content-platform.webp',
+    poster: '/images/work/content-platform-screen.webp',
+    videos: ['/videos/work5.mp4'],
     url: 'https://portfolio-arwa.vercel.app/',
     year: '2025',
   },
@@ -114,19 +119,19 @@ export function Works() {
   }, [isSmallScreen]);
 
   useEffect(() => {
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        const video = entry.target as HTMLVideoElement;
-        if (entry.isIntersecting) {
-          video.play();
-          video.classList.remove('blur');
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersection, {
-      threshold: 0.75,
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.25 },
+    );
 
     videoRefs.current.forEach((video) => {
       if (video) observer.observe(video);
@@ -184,22 +189,36 @@ export function Works() {
           {selectedWorksProps.map((work, i) => (
             <div key={work.name} className="work-card @container">
               <a className="group" target="_blank" rel="noopener noreferrer" href={work.url}>
-                <div className="flex-center relative aspect-square overflow-clip rounded-lg">
+                <div className="bg-flax-smoke-950 relative aspect-square overflow-clip rounded-lg">
                   <Image
-                    alt="work-background"
-                    src={work.imageBg}
-                    width={800}
-                    height={800}
-                    className="absolute size-full object-cover select-none"
+                    alt={`${work.name} website mockup`}
+                    src={work.mockup}
+                    fill
+                    sizes="(min-width: 768px) 58vw, 100vw"
+                    quality={90}
+                    className="object-cover select-none"
                   />
-                  <div className="flex-center z-10 aspect-4/3 size-full overflow-clip rounded-lg object-cover">
-                    <video
-                      ref={(el) => { videoRefs.current[i] = el; }}
-                      src={work.videoSrc}
-                      muted
-                      className="size-[80%] rounded-md object-contain blur transition-all duration-500 ease-in-out"
-                    />
-                  </div>
+                  {/* Sits exactly over the mockup's browser screen (see the mockup generator). */}
+                  <video
+                    ref={(el) => {
+                      videoRefs.current[i] = el;
+                    }}
+                    poster={work.poster}
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    aria-hidden="true"
+                    className="absolute top-[30.5%] left-[7%] h-[41.958%] w-[86%] object-cover object-top"
+                  >
+                    {work.videos.map((src) => (
+                      <source
+                        key={src}
+                        src={src}
+                        type={src.endsWith('.webm') ? 'video/webm' : 'video/mp4'}
+                      />
+                    ))}
+                  </video>
                 </div>
                 <div>
                   <p className="heading-6 font-title! mt-[2%] mb-[1%] leading-none">
