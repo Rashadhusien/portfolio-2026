@@ -58,6 +58,9 @@ const socialLinks = [
   },
 ];
 
+// X (Twitter) profile shown inline in the About copy; empty renders the icon without a link.
+const xProfileUrl = '';
+
 const resourceLinks = [
   {
     label: 'Pillarstack',
@@ -83,6 +86,7 @@ const dataCalConfig =
 
 export {
   socialLinks,
+  xProfileUrl,
   resourceLinks,
   heroText,
   locationPlace,
