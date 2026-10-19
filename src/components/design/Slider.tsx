@@ -6,11 +6,7 @@ import gsap from 'gsap';
 import Image from 'next/image';
 import { Button } from '@/components/common/Button';
 import { useWindowSize } from '@/hooks/useWindowSize';
-import {
-  getCharClassName,
-  getWordWrapperClassName,
-  splitTextIntoChars,
-} from '@/lib/functions';
+import { SplitText } from '@/components/SplitText';
 
 const people = [
   {
@@ -30,25 +26,6 @@ const people = [
     profile: '/images/reda.webp',
   },
 ];
-
-function QuoteSplitText({ quote }: { quote: string }) {
-  const words = splitTextIntoChars(`" ${quote} "`);
-  const charClass = getCharClassName(false);
-  const wordClass = getWordWrapperClassName(false);
-
-  return (
-    <p id="quote-text" className="heading-3 mb-14 min-h-36 max-w-[30ch] font-semibold md:min-h-fit md:max-w-full md:leading-none lg:min-h-36 lg:max-w-[30ch] lg:leading-normal">
-      {words.map((word, wordIndex) => (
-        <span key={wordIndex} className={wordClass}>
-          {word.map((char, charIndex) => (
-            <span key={charIndex} className={charClass}>{char}</span>
-          ))}
-        </span>
-      ))}
-      {' '}
-    </p>
-  );
-}
 
 export function Slider() {
   const [index, setIndex] = useState(0);
@@ -162,7 +139,11 @@ export function Slider() {
         <>
           <div className="columns-gap relative col-span-full flex flex-col max-lg:h-fit lg:col-span-6 lg:h-full">
             <div>
-              <QuoteSplitText quote={people[index].quote} />
+              <SplitText
+                id="quote-text"
+                text={`“${people[index].quote}”`}
+                className="heading-3 mb-14 min-h-36 max-w-[30ch] font-semibold md:min-h-fit md:max-w-full md:leading-none lg:min-h-36 lg:max-w-[30ch] lg:leading-normal"
+              />
               <div id="quote-author" className="heading-6 mb-6 font-semibold">
                 <p>{people[index].author}</p>
                 <p className="text-flax-smoke-400">{people[index].position}</p>
