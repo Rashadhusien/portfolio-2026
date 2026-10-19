@@ -225,18 +225,18 @@ export function Works() {
                   <p className="heading-6 font-title! mt-[2%] mb-[1%] leading-none">
                     {work.category}
                   </p>
-                  <div className="items-center justify-between sm:flex">
-                    <h3 className="heading-3 font-title! font-bold uppercase">{work.name}</h3>
-                    <div className="flex gap-1.5 select-none">
+                  <div className="flex flex-col gap-3 2xl:flex-row 2xl:items-center 2xl:justify-between">
+                    <h3 className="heading-3 font-title! min-w-0 font-bold text-balance uppercase">{work.name}</h3>
+                    <div className="flex shrink-0 flex-wrap gap-1.5 select-none 2xl:max-w-[50%] 2xl:justify-end">
                       {work.tags.map((tag) => (
                         <p
                           key={tag}
-                          className="border-flax-smoke-300 hover:bg-flax-smoke-300 hover:text-flax-smoke-900 rounded-full border px-4 py-2 transition-[background-color,color] duration-500 ease-in-out"
+                          className="border-flax-smoke-300 hover:bg-flax-smoke-300 hover:text-flax-smoke-900 rounded-full border px-4 py-2 whitespace-nowrap transition-[background-color,color] duration-500 ease-in-out"
                         >
                           <span>{tag}</span>
                         </p>
                       ))}
-                      <p className="border-flax-smoke-300 bg-flax-smoke-300 text-flax-smoke-900 hover:text-flax-smoke-300 rounded-full border px-4 py-2 transition-[background-color,color] duration-500 ease-in-out hover:bg-transparent">
+                      <p className="border-flax-smoke-300 bg-flax-smoke-300 text-flax-smoke-900 hover:text-flax-smoke-300 rounded-full border px-4 py-2 whitespace-nowrap transition-[background-color,color] duration-500 ease-in-out hover:bg-transparent">
                         <span>{work.year}</span>
                       </p>
                     </div>
