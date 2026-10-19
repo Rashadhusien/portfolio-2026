@@ -16,7 +16,7 @@ Legend: `[ ]` todo · `[x]` done · **AC** = acceptance criteria.
     `git config core.hooksPath .githooks` documented; owner override `ALLOW_MAIN_PUSH=1`.
 - [x] **CLAUDE.md, PLAN.md, TASKS.md** (approved 2026-10-19) (branch: `chore/project-docs-and-plan`)
   - AC: files at repo root; PR into `dev` opened; owner approves the plan.
-- [ ] **Lint baseline** (branch: `chore/lint-baseline`)
+- [x] **Lint baseline** (branch: `chore/lint-baseline`)
   - AC: `npm run lint` → 0 errors (fix setState-in-effect in AppShell/LenisProvider/Hero, prefer-const) and unused
     imports removed; no behaviour change.
 - [ ] **Tooling** (branch: `chore/tooling`)
@@ -30,29 +30,31 @@ Legend: `[ ]` todo · `[x]` done · **AC** = acceptance criteria.
 
 ## Phase 1: Bug fixes
 
-- [ ] **1. Split-text spaces** (branch: `fix/split-text-spaces`)
+All Phase 1 branches are combined (conflict-free) in `chore/phase-1-integration`.
+
+- [x] **1. Split-text spaces** (branch: `fix/split-text-spaces`)
   - AC: hero subtitle, testimonial quote and all headings show and copy with normal spaces; `textContent` of the
     quote contains "multiple projects has been a"; reveal animation unchanged; screen reader reads the sentence once.
-- [ ] **2. About `&Xopf;` → X link** (branch: `fix/about-x-link`)
+- [x] **2. About `&Xopf;` → X link** (branch: `fix/about-x-link`)
   - AC: an X logo icon/link (with `aria-label`) renders inline; no literal entity anywhere; URL comes from `socialLinks`.
-- [ ] **3. "PLUMBING" typo** (branch: `fix/plumbing-typo`)
+- [x] **3. "PLUMBING" typo** (branch: `fix/plumbing-typo`)
   - AC: the project title reads "Plumbing Services"; `grep -ri plumming src` returns nothing.
-- [ ] **4. Single availability config** (branch: `fix/availability-config`)
+- [x] **4. Single availability config** (branch: `fix/availability-config`)
   - AC: `src/config/site.ts` holds availability + contact links; hero and contact show the same label; changing one
     value updates both; hero has no `useEffect` for the date.
-- [ ] **5. Project tags wrap** (branch: `fix/project-tags-wrap`)
+- [x] **5. Project tags wrap** (branch: `fix/project-tags-wrap`)
   - AC: at 320 / 375 / 768 / 1280 / 1920px no tag overflows horizontally on "Event Management System" or
     "Full-Stack Content Platform"; `document.documentElement.scrollWidth === innerWidth`.
-- [ ] **6. Works index counter** (branch: `fix/works-index-counter`)
+- [x] **6. Works index counter** (branch: `fix/works-index-counter`)
   - AC: the counter always shows 01–05 matching the card in view, including during fast scroll, scroll-up and
     Lenis `scrollTo` jumps; it never shows "0" alone; no React re-render per scroll frame.
-- [ ] **7. Marquee clipping** (branch: `fix/marquee-clipping`)
+- [x] **7. Marquee clipping** (branch: `fix/marquee-clipping`)
   - AC: descenders and the star are fully visible on both rows at all breakpoints; no vertical scrollbar/overflow added.
-- [ ] **8. Project media quality** (branch: `fix/project-media-quality`)
+- [x] **8. Project media quality** (branch: `fix/project-media-quality`)
   - AC: each project has a unique ≥ 2400px mockup; `next/image` has `sizes` + `quality={90}`; AVIF served;
     videos use `poster`, `playsInline`, `preload="none"`, webm+mp4 sources; no blurred state stuck on mobile;
     no project media request > 5 MB on initial load.
-- [ ] **E5. Personal data cleanup** (branch: `fix/personal-data`), *needs your input*
+- [x] **E5. Personal data cleanup** (branch: `fix/personal-data`)
   - AC: no "Ebraheem"/"hetari"/"Yemen"/`Asia/Aden`/`brhoom` left unless intentional (README attribution stays).
 - [ ] **E10. A11y basics** (branch: `fix/a11y-basics`)
   - AC: no duplicate IDs (axe clean); interactive divs (scroll-to-top) are `<button>`s; images have correct alts.
@@ -62,17 +64,18 @@ Legend: `[ ]` todo · `[x]` done · **AC** = acceptance criteria.
 
 ## Phase 2: Animation foundation
 
-- [ ] **GSAP core + Lenis sync** (branch: `feature/animation-foundation`)
+- [x] **GSAP core + Lenis sync** (branch: `feature/animation-foundation`)
   - AC: `gsap` ≥ 3.13; `src/lib/gsap.ts` is the only `registerPlugin` call; no `gsap/all` imports; Lenis runs on
     `gsap.ticker` with `ScrollTrigger.update` on scroll; no `setTimeout` start; `useMotionPrefs` hook exists;
     with reduced motion Lenis is off and all content is visible; scroll is smooth with no ScrollTrigger jitter.
-- [ ] **Custom cursor + magnetic** (branch: `feature/cursor-magnetic`)
+- [x] **Custom cursor + magnetic** (branch: `feature/cursor-magnetic`)
   - AC: `data-cursor="link|view|hidden"` states work site-wide; "VIEW" shows over projects; all Buttons, the burger
     and social links are magnetic; cursor + magnet disabled on touch and < 768px; no listeners leak after unmount.
-- [ ] **Preloader** (branch: `feature/preloader`)
+- [x] **Preloader** (branch: `feature/preloader`)
   - AC: counter animates 000→100 tied to real readiness (fonts + hero image) with a ≥ 1.2s minimum; curtain reveal;
     hero name letters reveal after the curtain; scroll unlocked exactly when the reveal ends; repeat visit in the same
-    session ≤ 0.6s; reduced motion = quick fade; LCP not worse than the Phase 0 baseline.
+    session = curtain only (~0.8s); reduced motion = quick fade; LCP not worse than the Phase 0 baseline
+    (LCP to be measured in the Lighthouse task).
 
 ## Phase 3: Upgrades to existing sections
 

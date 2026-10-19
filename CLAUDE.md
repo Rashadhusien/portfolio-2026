@@ -37,29 +37,31 @@ src/
     robots.ts, sitemap.ts
   components/
     AppShell.tsx        # loader, grain overlay, cursor, nav
-    SplitText.tsx       # splits text into word/char spans for reveal animations
-    MagneticEffect.tsx  # magnetic hover wrapper
+    SplitText.tsx       # splits text into word/char spans for reveal animations (keeps real spaces)
     ServicesCard.tsx
-    common/             # Button, Link, Nav (generic UI)
-    design/             # Cursor, LoadingScreen, Marquee, Slider, Footer, MyName, Star, Circles, SamsungError
+    common/             # Button, Link, Nav, Magnetic (generic UI)
+    design/             # Cursor, LoadingScreen (preloader), Marquee, Slider, Footer, MyName, Star, Circles, SamsungError
     providers/          # LenisProvider (+ useLenis)
     sections/           # Hero, Services, Works, AboutMe, People (testimonials), Contact
+  config/site.ts        # single source: availability label, location/timezone, contact links
   data/earth.json       # Lottie for the contact section
-  hooks/useWindowSize.ts
+  hooks/
+    useMotionPrefs.ts   # { reduced, isFinePointerDesktop } from matchMedia, for gating effects
+    useWindowSize.ts
   lib/
-    animations/index.ts # shared GSAP helpers (split-text reveal, loader, hero intro, magnet, navbar)
-    functions/index.ts  # splitTextIntoChars, class helpers, gotoSection, availability date
-    data.ts             # nav, social, resource links, hero text, location, cal.com config
-    lenis-store.ts      # module-level Lenis singleton (getLenis/setLenis)
-    horizontal-loop.js  # GSAP horizontalLoop helper (currently unused)
+    gsap.ts             # THE gsap entry: registers plugins once, 'expo' ease, media-query constants
+    animations/index.ts # shared GSAP helpers (split-text reveal, hero intro, navbar)
+    functions/index.ts  # splitTextIntoChars, class helpers, gotoSection
+    data.ts             # nav, social, resource links, xProfileUrl
+    lenis-store.ts      # Lenis singleton, setScrollLocked(), scrollToTarget() (native fallback)
+    horizontal-loop.js  # GSAP horizontalLoop helper (for the velocity marquee)
 public/
   fonts/ images/ videos/  # static assets (project videos are large: prefer .webm + poster)
 .githooks/pre-push      # blocks pushes to main (see Git workflow)
 PLAN.md, TASKS.md       # roadmap and phased checklist
 ```
 
-Planned additions (see PLAN.md): `src/config/site.ts` (single source for availability, contact, timezone),
-`src/data/*.ts` (projects, testimonials, experience, stack), `src/lib/gsap.ts` (one plugin registration point).
+Planned additions (see PLAN.md): `src/data/*.ts` (projects, testimonials, experience, stack, stats).
 
 ## Commands
 
@@ -94,6 +96,11 @@ npx prettier --write .      # format (prettier + prettier-plugin-tailwindcss are
    git config core.hooksPath .githooks
    ```
    Owner override for the manual release: `ALLOW_MAIN_PUSH=1 git push origin main`.
+
+### Merging stacked work
+
+Phase 1 branches were cut before anything was merged, so `chore/phase-1-integration` merges all of them; later
+branches stack on it. Merge the integration branch (or each Phase 1 PR, in its listed order) into `dev` first.
 
 ### Common commands
 
@@ -135,20 +142,27 @@ Without it, open `https://github.com/Rashadhusien/portfolio-2026/compare/dev...<
 
 ## Animation rules
 
-- **Single registration point:** GSAP plugins (ScrollTrigger, etc.) are registered once in `src/lib/gsap.ts`
-  (to be created in `feature/animation-foundation`) and imported from there. Do not call `gsap.registerPlugin` in
-  components, and never import from `gsap/all` (it pulls in every plugin).
+- **Single registration point:** import `gsap`, `ScrollTrigger`, `useGSAP` (and `CustomEase`) from `@/lib/gsap`,
+  never from `gsap`/`@gsap/react` directly. Do not call `gsap.registerPlugin` anywhere else, and never import
+  `gsap/all`. The house ease is `'expo'`.
 - **Lenis ↔ ScrollTrigger sync:** one Lenis instance driven by `gsap.ticker` and
   `lenis.on('scroll', ScrollTrigger.update)`, with `gsap.ticker.lagSmoothing(0)`. No second `requestAnimationFrame` loop.
+- **Scrolling:** lock/unlock only via `setScrollLocked()`; programmatic scrolls via `scrollToTarget()` (works when
+  Lenis is off). The page starts locked (`stop-scrolling` on `<body>`) and the preloader unlocks it.
+- **Cursor:** mark elements with `data-cursor="view|link|hidden"`; links/buttons get `link` automatically. Wrap
+  interactive elements in `<Magnetic>` (child `data-magnetic-inner` for parallax) instead of hand-written magnets.
 - **Cleanup:** every animation lives inside `useGSAP(() => {...}, { scope: ref, dependencies: [...] })` or a
   `gsap.context()` that is reverted on unmount. Event listeners added inside must be removed in the returned cleanup.
-- **Reduced motion:** use `gsap.matchMedia()` with `(prefers-reduced-motion: reduce)`; content must be fully visible
+- **Reduced motion:** check `useMotionPrefs().reduced` / `prefersReducedMotion()` (or `gsap.matchMedia()`); content must be fully visible
   and readable with no motion (no element may stay at `opacity: 0` / `translateY(100%)`). Lenis is disabled too.
 - **Mobile:** heavy effects (WebGL, custom cursor, magnetic, pinned horizontal scroll, velocity skew) are disabled
   below `md` (768px) and on touch devices (`(hover: none)`).
 - **60fps:** animate only `transform` and `opacity` (plus `clip-path` when needed). Never animate
   `width/height/top/left/margin/filter` per frame. Use `gsap.quickTo`/`quickSetter` for pointer-driven values,
   `will-change` only while animating.
+- **Tailwind translate gotcha:** classes like `translate-y-full` set the CSS `translate` property. On HTML elements
+  `gsap.to(el, { y: 0 })` works; on **SVG** elements GSAP mis-reads it, so tween `'--tw-translate-y'` instead.
+  Avoid zero-duration tweens of CSS variables (use `0.001`).
 - **Text splitting:** go through `SplitText` (the component). Real space characters must exist between words and the
   container carries an `aria-label` with the full sentence; letters are `aria-hidden`.
 
