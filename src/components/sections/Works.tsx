@@ -1,10 +1,8 @@
 'use client';
 
+import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap';
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from '@/components/SplitText';
 import { animateSplitText } from '@/lib/animations';
 import { useWindowSize } from '@/hooks/useWindowSize';

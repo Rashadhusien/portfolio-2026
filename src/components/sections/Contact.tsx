@@ -1,6 +1,6 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
+import { useGSAP } from '@/lib/gsap';
 import dynamic from 'next/dynamic';
 import { Button } from '@/components/common/Button';
 import { Link } from '@/components/common/Link';

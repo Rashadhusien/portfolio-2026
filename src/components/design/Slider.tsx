@@ -1,8 +1,7 @@
 'use client';
 
+import { gsap, useGSAP } from '@/lib/gsap';
 import { useState } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 import Image from 'next/image';
 import { Button } from '@/components/common/Button';
 import { useWindowSize } from '@/hooks/useWindowSize';

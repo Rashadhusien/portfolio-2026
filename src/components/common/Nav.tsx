@@ -1,7 +1,7 @@
 'use client';
 
+import { useGSAP } from '@/lib/gsap';
 import { useEffect, useRef, useState } from 'react';
-import { useGSAP } from '@gsap/react';
 import { BurgerMenuBtn } from '@/components/BurgerMenuBtn';
 import { MagneticEffect } from '@/components/MagneticEffect';
 import { Button } from '@/components/common/Button';

@@ -1,7 +1,7 @@
 'use client';
 
+import { useGSAP } from '@/lib/gsap';
 import Image from 'next/image';
-import { useGSAP } from '@gsap/react';
 import { SplitText } from '@/components/SplitText';
 import { xProfileUrl } from '@/lib/data';
 import {

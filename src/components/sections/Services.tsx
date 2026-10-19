@@ -1,6 +1,6 @@
 'use client';
 
-import { useGSAP } from '@gsap/react';
+import { useGSAP } from '@/lib/gsap';
 import { ServicesCard } from '@/components/ServicesCard';
 import { SplitText } from '@/components/SplitText';
 import { animateSplitText } from '@/lib/animations';

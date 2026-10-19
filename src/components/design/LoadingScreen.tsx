@@ -1,7 +1,7 @@
 'use client';
 
+import { useGSAP } from '@/lib/gsap';
 import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
 import {
   animateLoadingPath,
   animateLoadingText,
