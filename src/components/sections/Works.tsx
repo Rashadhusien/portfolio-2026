@@ -66,8 +66,6 @@ export function Works() {
   const { width } = useWindowSize();
   const isSmallScreen = width < 768;
 
-  const cursorTl = useRef<gsap.core.Timeline | null>(null);
-
   // Slides the 01…0N reel to the project in view. overwrite keeps fast scrolling
   // from stacking tweens (which used to leave the number pushed out of view).
   const showIndex = (i: number) => {
@@ -79,19 +77,6 @@ export function Works() {
     });
   };
 
-  useGSAP(() => {
-    const cursor = document.getElementById('cursor');
-    const inner = document.getElementById('inner');
-    if (!cursor || !inner) return;
-
-    cursorTl.current = gsap
-      .timeline({ defaults: { duration: 0.25 } })
-      .to(['#cursor', '#inner'], { scale: 1, opacity: 1 })
-      .paused(true);
-  }, []);
-
-  const showCursor = () => cursorTl.current?.play();
-  const hideCursor = () => cursorTl.current?.reverse();
 
   useGSAP(() => {
     animateSplitText(
@@ -180,13 +165,11 @@ export function Works() {
           </span>
         </div>
         <aside
-          onMouseEnter={showCursor}
-          onMouseLeave={hideCursor}
           className="relative col-span-full flex flex-col space-y-10 md:col-span-7"
         >
           {selectedWorksProps.map((work, i) => (
             <div key={work.name} className="work-card @container">
-              <a className="group" target="_blank" rel="noopener noreferrer" href={work.url}>
+              <a className="group" data-cursor="view" target="_blank" rel="noopener noreferrer" href={work.url}>
                 <div className="bg-flax-smoke-950 relative aspect-square overflow-clip rounded-lg">
                   <Image
                     alt={`${work.name} website mockup`}

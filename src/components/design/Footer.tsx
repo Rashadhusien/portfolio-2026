@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import moment from 'moment-timezone';
-import { MagneticEffect } from '@/components/MagneticEffect';
+import { Magnetic } from '@/components/common/Magnetic';
 import { Link } from '@/components/common/Link';
 import { navbarLinks, resourceLinks, socialLinks } from '@/lib/data';
 import { siteConfig } from '@/config/site';
@@ -77,15 +77,18 @@ export function Footer() {
         </div>
 
         <div className="hidden md:col-span-2 md:col-start-11 md:block lg:col-span-1 lg:col-start-12">
-          <MagneticEffect divId="scroll-to-top" textId="scroll-to-top-icon">
-            <div
+          <Magnetic strength={0.5} innerStrength={0.25}>
+            <button
+              type="button"
               onClick={scrollToTop}
+              aria-label="Scroll to top"
               id="scroll-to-top"
               className="flex-center bg-flax-smoke-400 size-20 cursor-pointer flex-col rounded-full"
             >
               <svg
                 className="size-1/2"
                 id="scroll-to-top-icon"
+                data-magnetic-inner
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
                 width="24"
@@ -96,8 +99,8 @@ export function Footer() {
                 <path d="M12 4L12 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M16.9998 8.99996C16.9998 8.99996 13.3174 4.00001 11.9998 4C10.6822 3.99999 6.99982 9 6.99982 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </div>
-          </MagneticEffect>
+            </button>
+          </Magnetic>
         </div>
       </div>
     </footer>

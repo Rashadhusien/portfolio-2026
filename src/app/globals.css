@@ -226,6 +226,11 @@ body.stop-scrolling {
   }
 }
 
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
 .ease-expo {
   transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }

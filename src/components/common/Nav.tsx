@@ -3,7 +3,7 @@
 import { useGSAP } from '@/lib/gsap';
 import { useEffect, useRef, useState } from 'react';
 import { BurgerMenuBtn } from '@/components/BurgerMenuBtn';
-import { MagneticEffect } from '@/components/MagneticEffect';
+import { Magnetic } from '@/components/common/Magnetic';
 import { Button } from '@/components/common/Button';
 import { Link } from '@/components/common/Link';
 import { Circles } from '@/components/design/Circles';
@@ -128,15 +128,11 @@ export function Nav({ onScrollLock }: NavProps) {
 
       <header className="padding-x! absolute inset-0 z-20 h-fit -translate-y-full pt-6 will-change-auto">
         <nav className="flex justify-between">
-          <MagneticEffect
-            divId="name-container"
-            textId="name"
-            magnetoStrengthVal={20}
-            magnetoTextStrengthVal={10}
-          >
+          <Magnetic strength={0.15} innerStrength={0.08}>
             <div id="name-container" className="group -m-10 h-fit cursor-pointer p-10">
               <h2
                 id="name"
+                data-magnetic-inner
                 className="font-fancy! flex items-start text-xl font-extrabold uppercase md:text-3xl"
               >
                 Dev
@@ -145,7 +141,7 @@ export function Nav({ onScrollLock }: NavProps) {
                 </span>
               </h2>
             </div>
-          </MagneticEffect>
+          </Magnetic>
 
           <div className="flex justify-start">
             <p className="heading-6 font-fancy! text-3xl text-flax-smoke-400 hidden font-bold uppercase select-none md:block">
