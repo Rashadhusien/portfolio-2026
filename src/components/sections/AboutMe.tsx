@@ -95,7 +95,7 @@ export function AboutMe() {
         <div className="pointer-events-none col-span-full content-end rounded-lg select-none md:col-span-4">
           <Image
             src="/images/profile2.jpg"
-            alt="Headshot of Ebraheem facing a camera"
+            alt="Portrait of Rashad Hussein"
             width={600}
             height={900}
             className="aspect-[1/1.5] rounded-lg object-cover object-top mix-blend-screen brightness-90 grayscale"
